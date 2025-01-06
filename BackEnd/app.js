@@ -6,6 +6,13 @@ const app = express();
 const cors = require("cors");
 const connectDB = require("./db/db");
 
+const userRouter = require("./routes/user.routes");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/users", userRouter);
+
 connectDB();
 
 app.use(cors());
