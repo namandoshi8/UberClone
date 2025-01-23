@@ -7,27 +7,27 @@ function CaptainLogin() {
   const [password, setPassword] = useState("");
   //   const [userData, setUserData] = useState({});
 
-  const { user, setUser } = useContext(CaptainDataContext);
+  const { captain, setCaptain } = useContext(CaptainDataContext);
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const userData = {
+    const captain = {
       email: email,
       password: password,
     };
 
     const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/users/login`,
-      userData
+      `${import.meta.env.VITE_BASE_URL}/captains/login`,
+      captain
     );
 
     if (response.status === 200) {
       const data = response.data;
-      setUser(data.user);
+      setCaptain(data.user);
       localStorage.setItem("token", data.token);
-      navigate("/home");
+      navigate("/captain-home");
     }
 
     setEmail("");
@@ -48,7 +48,7 @@ function CaptainLogin() {
             submitHandler(e);
           }}
         >
-          <h3 className="text-lg font-medium mb-2">What is your email</h3>
+          <h3 className="text-lg font-medium mb-2">What&apos;s your email</h3>
           <input
             required
             value={email}

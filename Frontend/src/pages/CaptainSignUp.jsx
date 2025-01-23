@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-// import { CaptainDataContext } from "../context/CapatainContext";
+import { CaptainDataContext } from "../context/captainContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -17,7 +17,7 @@ const CaptainSignup = () => {
   const [vehicleCapacity, setVehicleCapacity] = useState("");
   const [vehicleType, setVehicleType] = useState("");
 
-  //   const { captain, setCaptain } = React.useContext(CaptainDataContext);
+  const { captain, setCaptain } = useContext(CaptainDataContext);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -43,7 +43,7 @@ const CaptainSignup = () => {
 
     if (response.status === 201) {
       const data = response.data;
-      //   setCaptain(data.captain);
+      setCaptain(data.captain);
       localStorage.setItem("token", data.token);
       navigate("/captain-home");
     }
@@ -72,7 +72,7 @@ const CaptainSignup = () => {
           }}
         >
           <h3 className="text-lg w-full  font-medium mb-2">
-            What's our Captain's name
+            What&apos;s our Captain&apos;s name
           </h3>
           <div className="flex gap-4 mb-7">
             <input
@@ -98,7 +98,7 @@ const CaptainSignup = () => {
           </div>
 
           <h3 className="text-lg font-medium mb-2">
-            What's our Captain's email
+            What&apos;s our Captain&apos;s email
           </h3>
           <input
             required
